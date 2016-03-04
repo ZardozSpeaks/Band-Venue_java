@@ -47,4 +47,25 @@ public class BandTest {
     Band savedBand = Band.find(testBand.getId());
     assertEquals(savedBand.getBio(), "Originally from Leyton");
   }
+
+  @Test
+  public void update_updatesNameAndCountry() {
+    Band testBand = new Band("Judass Priest", "USA");
+    testBand.save();
+    testBand.setName("Judas Priest");
+    testBand.setCountry("UK");
+    testBand.update();
+    Band savedBand = Band.find(testBand.getId());
+    assertEquals(savedBand.getName(), "Judas Priest");
+    assertEquals(savedBand.getCountry(), "UK");
+  }
+
+  @Test
+  public void delete_deletesBandFromDatabase() {
+    Band testBand = new Band("Mötorhead", "UK");
+    testBand.save();
+    Band savedBand = Band.find(testBand.getId());
+    savedBand.delete();
+    assertEquals(Band.all().size(), 0);
+  }
 }

@@ -1,6 +1,5 @@
 import org.sql2o.*;
 import java.util.List;
-import java.util.Date;
 
 
 public class Band {
@@ -26,7 +25,7 @@ public class Band {
     }
   }
 
-  //GETTER FUNCTIONS//
+  //GETTER MEHTODS//
 
   public int getId() {
     return id;
@@ -44,7 +43,7 @@ public class Band {
     return bio;
   }
 
-  //SETTER FUNCTIONS//
+  //SETTER METHODS//
 
   public void setName(String newName) {
     name = newName;
@@ -104,7 +103,7 @@ public class Band {
 
   public void update() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE bands SET name = :name, country = country WHERE id = :id";
+      String sql = "UPDATE bands SET name = :name, country = :country WHERE id = :id";
       con.createQuery(sql)
       .addParameter("id", this.id)
       .addParameter("name", this.name)
@@ -115,16 +114,12 @@ public class Band {
 
   //DELETE//
 
-//   public void delete() {
-//     try(Connection con DB.sql2o.open()) {
-//       String sql = "DELETE FROM students WHERE id = :id";
-//       con.createQuery(sql)
-//       .addParameter("id", this.id)
-//       .executeUpdate();
-//     }
-//   }
-// }
-
-
-
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM bands WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
 }
