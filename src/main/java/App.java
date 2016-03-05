@@ -26,6 +26,7 @@ public class App {
       List<Venue> venuesList = Band.find(selectedBand).getVenues();
       String bandName = Band.find(selectedBand).getName();
 
+      model.put ("selectedBand", selectedBand);
       model.put ("bandName", bandName);
       model.put ("venuesList", venuesList);
       return new ModelAndView(model, layout);
@@ -60,12 +61,36 @@ public class App {
     post("/new-venue", (request, response) -> {
       String newVenueName = request.queryParams("venue-name");
       String newVenueCity = request.queryParams("venue-city");
-      String newVenueState = request.queryParams("venue-state")
+      String newVenueState = request.queryParams("venue-state");
       Venue newVenue = new Venue(newVenueName, newVenueCity, newVenueState);
       newVenue.save();
       response.redirect("/");
       return null;
     });
+
+    get("/band/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Band band = Band.find(id);
+      model.put("band", band);
+      model.put("venues", Venue.all());
+      model.put("template", "templates/band.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/band/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Band band = Band.find(id);
+      String bio = request.queryParams("bio");
+      String venueList = request.queryParamsValues("venue-list")
+      band.setBio(bio);
+      band.
+      model.put("band", band.find(id));
+      model.put("venues", Venue.all());
+      model.put("template", "templates/band.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
   }
 }

@@ -91,4 +91,16 @@ public class Venue {
     }
   }
 
+  //UPDATE//
+
+  public void addBand(Band band) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO bands_venues (band_id, venue_id) VALUES (:band_id, :venue_id);";
+      con.createQuery(sql)
+        .addParameter("band_id", band.getId())
+        .addParameter("venue_id", this.getId())
+        .executeUpdate();
+    }
+  }
+
 }
