@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello Friend!</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  </head>
-  <body>
-    <div class="container">
-
-      #parse( $template )
-
+<head>
+  <title>The Ultimate Band Tracker</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="pagehead">
+      <h1>Utilmate Band Tracker</h1>
     </div>
-  </body>
+    <div class="row">
+      <div id="left-col" class="col-md-6">
+
+        <h2>Choose Your Band:</h2>
+
+        <form action="/" method="post">
+          <div class="form-group">
+            <select id="band-select" name="band-select" class="form-control" type="text" onchange="this.form.submit();">
+              <option selected="true" disabled="disabled">Select Band</option>
+              #foreach($band in $bands)
+              <option value="$band.getId()">$band.getName()</option>
+              #end
+            </select>
+          </div>
+        </form>
+
+        #if($bandName)
+        <h4>$bandName</h4>
+        #end
+        <ul>
+          #foreach ($venue in $venuesList)
+          <li>$venue.getName(), $venue.getCity(), $venue.getState()</li>
+          #end
+        </ul>
+        <a href="/new-band"><button class="btn btn-info">Add a Band</button></a>
+      </div>
+      <div id="right-col" class="col-md-6">
+        #parse( $template )
+      </div>
+    </div>
+  </div>
+</body>
 </html>

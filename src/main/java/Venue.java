@@ -58,6 +58,20 @@ public class Venue {
     state = newState;
   }
 
+  //CREATE//
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "INSERT INTO venues (venue_name, city, state) VALUES (:name, :city, :state)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("name", this.venue_name)
+      .addParameter("city", this.city)
+      .addParameter("state", this.state)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
   //READ//
 
   public static List<Venue> all() {
@@ -67,4 +81,14 @@ public class Venue {
       .executeAndFetch(Venue.class);
     }
   }
+
+  public static Venue find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM venues WHERE id=:id";
+      return con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Venue.class);
+    }
+  }
+
 }

@@ -1,6 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
+import java.util.List;
 
 public class BandTest {
 
@@ -67,5 +68,18 @@ public class BandTest {
     Band savedBand = Band.find(testBand.getId());
     savedBand.delete();
     assertEquals(Band.all().size(), 0);
+  }
+
+
+  @Test
+  public void getAuthors_returnsAllAuthors_List() {
+    Band myBand = new Band("Metallica", "US");
+    myBand.save();
+
+    Venue myVenue = new Venue("Mollys", "London", "UK");
+    myVenue.save();
+
+    List savedVenues = myBand.getVenues();
+    assertEquals(savedVenues.size(), 1);
   }
 }

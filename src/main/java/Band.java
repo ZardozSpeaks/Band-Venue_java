@@ -80,6 +80,15 @@ public class Band {
     }
   }
 
+  public List<Venue> getVenues() {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT venues.* FROM bands JOIN bands_venues ON (bands_venues.band_id = bands.id) JOIN venues ON (venues.id = bands_venues.venue_id) WHERE band_id=:id";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Venue.class);
+      }
+  }
+
   public static Band find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM bands WHERE id=:id";
