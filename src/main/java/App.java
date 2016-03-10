@@ -85,6 +85,8 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params("id"));
       Band band = Band.find(id);
+      String newBandName = request.queryParams("band-name");
+      String newBandCountry = request.queryParams("band-country");
       String bio = request.queryParams("bio");
       String[] venueList = request.queryParamsValues("venue-list");
       if (venueList != null) {
@@ -93,7 +95,10 @@ public class App {
         }
       }
       band.setBio(bio);
+      band.setName(newBandName);
+      band.setCountry(newBandCountry);
       band.updateBio();
+      band.update();
       response.redirect("/");
       return null;
     });

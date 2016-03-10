@@ -72,12 +72,13 @@ public class BandTest {
 
 
   @Test
-  public void getAuthors_returnsAllAuthors_List() {
-    Band myBand = new Band("Metallica", "US");
-    myBand.save();
-
+  public void getVenues_returnsAllVenues_List() {
     Venue myVenue = new Venue("Mollys", "London", "UK");
     myVenue.save();
+
+    Band myBand = new Band("Metallica", "US");
+    myBand.save();
+    myBand.addVenue(myVenue);
 
     List savedVenues = myBand.getVenues();
     assertEquals(savedVenues.size(), 1);
