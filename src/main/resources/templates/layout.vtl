@@ -26,8 +26,11 @@
           </div>
         </form>
 
-        #if($bandName)
-          <a href="/band/$selectedBand"><h4>$bandName</h4></a>
+        #if($band)
+          <a href="/band/$selectedBand"><h4>$band.getName()</h4></a>
+        #end
+        #if($band.getBio())
+          <p>$band.getBio()</p>
         #end
         <ul>
           #foreach ($venue in $venuesList)

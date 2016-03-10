@@ -24,10 +24,10 @@ public class App {
 
       int selectedBand = Integer.parseInt(request.queryParams("band-select"));
       List<Venue> venuesList = Band.find(selectedBand).getVenues();
-      String bandName = Band.find(selectedBand).getName();
+      Band band = Band.find(selectedBand);
 
-      model.put ("selectedBand", selectedBand);
-      model.put ("bandName", bandName);
+      model.put ("band", band);
+      model.put("selectedBand", selectedBand);
       model.put ("venuesList", venuesList);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -73,6 +73,8 @@ public class App {
       int id = Integer.parseInt(request.params("id"));
       Band band = Band.find(id);
       model.put("band", band);
+      model.put("playedVenues", band.getVenues());
+      model.put("bands", Band.all());
       model.put("venues", Venue.all());
       model.put("template", "templates/band.vtl");
       return new ModelAndView(model, layout);
@@ -83,14 +85,17 @@ public class App {
       int id = Integer.parseInt(request.params("id"));
       Band band = Band.find(id);
       String bio = request.queryParams("bio");
-      String venueList = request.queryParamsValues("venue-list")
+      String[] venueList = request.queryParamsValues("venue-list");
+      if (venueList != null) {
+        for(String venue : venueList) {
+          band.addVenue(Venue.find(Integer.parseInt(venue)));
+        }
+      }
       band.setBio(bio);
-      band.
-      model.put("band", band.find(id));
-      model.put("venues", Venue.all());
-      model.put("template", "templates/band.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
+      band.updateBio();
+      response.redirect("/");
+      return null;
+    });
 
   }
 }

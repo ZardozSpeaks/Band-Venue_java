@@ -1,4 +1,14 @@
-<h2>Edit band.getName()</h2>
+<h2>Edit $band.getName()</h2>
 
 <form action="/band/$band.getId()" method="post">
+  #if($band.getBio())
+  <input id="bio" class="bio-field" name="bio" type=textarea value="$band.getBio()"><br>
+  #else
+  <input id="bio" class="bio-field"name="bio" type=textarea placeholder="Add a bio"><br>
+  #end
+  <h3>What venues has this band played?</h3>
+  #foreach($venue in $venues)
+    <input type="checkbox" name="venue-list" value="$venue.getId()">$venue.getName()<br>
+  #end
+  <button class="btn">Submit</button>
 </form>
