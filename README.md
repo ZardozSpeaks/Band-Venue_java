@@ -14,7 +14,10 @@ _This app allows users to input their favorite bands and venues and then record 
 * _Mac users may have to enable Java in their System Preferences_
 * _Install gradle using Homebrew on OSx with the command $brew install gradle_
 * _Install gradle on Windows following the instructions at http://codetutr.com/2013/03/23/how-to-install-gradle? ._
+* _Install postgresql using Homebrew on OSx with the command $brew install postgresql_
+* _Install postgresql on Windows following the instructions at http://www.postgresql.org/download/windows/ ._
 * _Clone this repository to your local machine_
+* _Start a new postgresql session by opening a new terminal window and typing "postgres"_
 * _Restore the database backup by typing "psql band_venue.sql > band_venue" into terminal from the root file_
 * _Run gradle from the root file in terminal(OSx) or cmd line(Windows)_
 * _Navigate to http://localhost:4567/ in your browser to view the app_
