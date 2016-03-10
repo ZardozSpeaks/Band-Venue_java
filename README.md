@@ -1,12 +1,12 @@
-# _{Application Name}_
+# _Ultimate Band Tracker_
 
-#### _{Brief description of application}, {Date of current version}_
+#### _app for keeping track of where bands have played, March 3rd, 2016_
 
 #### By _**David Remington**_
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_This app allows users to input their favorite bands and venues and then record which venues the bands have played_
 
 ## Setup/Installation Requirements
 
@@ -15,12 +15,13 @@ _{This is a detailed description of your application. Its purpose and usage.  Gi
 * _Install gradle using Homebrew on OSx with the command $brew install gradle_
 * _Install gradle on Windows following the instructions at http://codetutr.com/2013/03/23/how-to-install-gradle? ._
 * _Clone this repository to your local machine_
+* _Restore the DBbackup.sql file by typing "psql DBbackup.sql > band_venue" into terminal from the root file_
 * _Run gradle from the root file in terminal(OSx) or cmd line(Windows)_
 * _Navigate to http://localhost:4567/ in your browser to view the app_
 
 ## Known Bugs
 
-_{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
+_No known bugs_
 
 ## Support and contact details
 
@@ -28,7 +29,7 @@ _Contact me through GitHub at user ZardozSpeaks if you have any issues_
 
 ## Technologies Used
 
-_Java, gradle, maven, spark, and velocity. FluentLenium and jUnit for testing_
+_Java, gradle, maven, spark, postgres, and velocity. FluentLenium and jUnit for testing_
 
 ### License
 
