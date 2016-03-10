@@ -43,6 +43,13 @@
         <div class="btn-wrapper">
           <a href="/new-venue"><button class="btn btn-info">Add a Venue</button></a>
       </div>
+
+      <h2>All Venues:</h2>
+
+        #foreach($venue in $venues)
+          <li><a href=/venue/$venue.getId()>$venue.getName()</a></li>
+        #end($venues)
+
       </div>
       <div id="right-col" class="col-md-6">
         #parse( $template )

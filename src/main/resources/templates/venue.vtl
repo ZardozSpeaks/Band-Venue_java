@@ -1,0 +1,8 @@
+<h2>$venue.getName()</h2>
+<h3>$venue.getCity(),$venue.getState()</h3>
+
+<h4>Bands who have played here</h4>
+
+#foreach($band in $playedBands)
+<li>$band.getName()</li>
+#end
